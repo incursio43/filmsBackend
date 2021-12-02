@@ -9,6 +9,16 @@ export const getFilms = async (req, res) => {
   })
 }
 
+export const getFilm = async (req, res) => {
+  const { ID } = req.body
+  await pool.query(`SELECT * FROM FILMS WHERE ID = ${ID}`, function(error, results){
+    if(error){
+      throw error;
+      res.json(results)
+    }
+  })
+}
+
 export const postFilms = async (req, res) => {
   const { Name, Director, IdGenre, Descripcion, Type, Year, Review, Score } = req.body
   await pool.query(`INSERT INTO FILMS (Name, Director, IdGenre, Descripcion, Type, Year, Review, Score, Director) 
