@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors'
 import genresRoutes from '../routes/genresRoutes'
-// import filmsRoutes from '..'
-// import favoritesRoutes from '..'
+import filmsRoutes from '../routes/filmsRoutes'
+import favoritesRoutes from '../routes/favoritesRoutes'
 
 
 const app = express();
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/genres', genresRoutes)
-// app.use('/favorites', favoritesRoutes)
-// app.use('/films', filmsRoutes)
+app.use('/favorites', favoritesRoutes)
+app.use('/films', filmsRoutes)
 
 export default app

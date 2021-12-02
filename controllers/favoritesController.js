@@ -10,9 +10,8 @@ export const getFavorites = async (req, res) => {
 }
 
 export const postFavorites = async (req, res) => {
-  const { Name, Director, IdGenre, Descripcion, Type, Year, Review, Score } = req.body
-  await pool.query(`INSERT INTO FAVORITES (Name, Director, IdGenre, Descripcion, Type, Year, Review, Score, Director) 
-  values ('${Name}','${Director}','${IdGenre}','${Descripcion}','${Type}','${Year}','${Review}','${Score}')`, function(error, results){
+  const { IdFild } = req.body
+  await pool.query(`INSERT INTO FAVORITES (IdFild) values (${IdFild})`, function(error, results){
     if(error){
       throw error;
       res.json(results)
