@@ -1,9 +1,10 @@
 import pool from '../db/mysql'
 
 export const getFavorites = async (req, res) => {
-  await pool.query(`SELECT fa.ID  as idFavorite, fi.Name, fi.Type, fi.IdGenre, fi.Year
+  await pool.query(`SELECT fa.ID  as idFavorite, fi.Director, fi.Name, fi.Type, fi.IdGenre, g.Name as Genre, fi.Year
   FROM favorites fa
-  LEFT JOIN film fi on fi.ID = fa.IdFild`, function(error, results){
+  LEFT JOIN film fi on fi.ID = fa.IdFild
+  INNER JOIN genre g on g.ID = fi.IdGenre`, function(error, results){
     if(error){
       res.status(400).json({message:'Hubo un error al procesar la peticion', error})
       throw error;
