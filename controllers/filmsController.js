@@ -28,10 +28,8 @@ export const getFilm = async (req, res) => {
 
 export const postFilms = async (req, res) => {
   const { Name, Director, IdGenre, Description, Type, Year, Review, Score } = req.body
-  //Name, Director, idGenre, Type, Year
   if(Name === null || Name === '' || Director === null || Director === '' || IdGenre === null || IdGenre === '' || Type === null || Type === '' || Year === null || Year === ''){
     res.status(421).json({message:'Alguno de datos son nulos o no fueron proporcionados.'})
-    return
   }
   await pool.query(`INSERT INTO FILM (Name, Director, IdGenre, Description, Type, Year, Review, Score) 
   values ('${Name}','${Director}','${IdGenre}','${Description}','${Type}','${Year}','${Review}','${Score}')`, function(error, results){
@@ -48,7 +46,6 @@ export const putFilms = async (req, res) => {
   const { Description, Type, Year, Review, Score } = req.body
   if(Type === null || Type === '' || Year === null || Year === ''){
     res.status(421).json({message:'Alguno de datos son nulos o no fueron proporcionados.'})
-    return
   }
   await pool.query(`UPDATE FILM SET Description='${Description}', Type='${Type}', Year='${Year}', Review='${Review}', Score=${Score} WHERE ID=${ID}`, function(error, results){
     if(error){
