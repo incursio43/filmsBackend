@@ -14,9 +14,10 @@ export const getFilms = async (req, res) => {
 
 export const getFilm = async (req, res) => {
   const ID = req.params.id
-  await pool.query(`SELECT fi.ID, fi.Name, fi.Director, fi.IdGenre, fi.Description, fi.Type, fi.Year, fi.Review, fi.Score, fa.ID as isFavorite 
+  await pool.query(`SELECT fi.ID, fi.Name, fi.Director, fi.IdGenre, g.Name as Genre, fi.Description, fi.Type, fi.Year, fi.Review, fi.Score, fa.ID as isFavorite 
   FROM film fi 
   LEFT JOIN favorites fa ON fa.IdFild = fi.ID 
+  INNER JOIN genre g ON g.ID = fi.IdGenre
   WHERE fi.ID = ${ID}`, function(error, results){
     if(error){
       res.status(400).json({message:'Hubo un error al procesar la peticion', error})
