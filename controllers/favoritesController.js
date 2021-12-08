@@ -30,7 +30,7 @@ export const postFavorites = async (req, res) => {
 
 export const deleteFavorites = async (req, res) => {
   const ID = req.params.id
-  await pool.query(`DELETE FROM FAVORITES WHERE ID=${ID}`, function(error, results){
+  await pool.query(`DELETE FROM FAVORITES WHERE IdFild=${ID}`, function(error, results){
     if(error){
       res.status(400).json({message:'Hubo un error al procesar la peticion', error})
       throw error;
